@@ -11,6 +11,7 @@ private:
 	Vector2f position;
 	float speed;
 	Vector2f curDir;
+	bool isCollision;
 
 public:
 	Ball();
@@ -36,4 +37,7 @@ public:
 
 	void Update(float dt);
 	void Draw(RenderWindow& window);
+
+	void SetisCollision(bool col);
+	bool GetisCollision();
 };

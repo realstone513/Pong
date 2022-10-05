@@ -1,7 +1,8 @@
 #include "Ball.h"
 #include <iostream>
 
-Ball::Ball() : speed(0)
+Ball::Ball()
+	: speed(0), isCollision(true)
 { 
 	shape.setRadius(10.f);
 	shape.setPosition(position);
@@ -55,11 +56,15 @@ void Ball::OnCollision()
 void Ball::OnCollisionTop()
 {
 	curDir.y *= -1;
+	SetisCollision(true);
+	std::cout << "top" << std::endl;
 }
 
 void Ball::OnCollisionSides()
 {
 	curDir.x *= -1;
+	SetisCollision(true);
+	std::cout << "side" << std::endl;
 }
 
 void Ball::OnCollisionBottom()
@@ -71,6 +76,7 @@ void Ball::OnCollisionBat()
 {
 	std::cout << "bat" << std::endl;
 	curDir.y *= -1;
+	SetisCollision(true);
 }
 
 void Ball::Update(float dt)
@@ -82,4 +88,14 @@ void Ball::Update(float dt)
 void Ball::Draw(RenderWindow& window)
 {
 	window.draw(shape);
+}
+
+void Ball::SetisCollision(bool col)
+{
+	isCollision = col;
+}
+
+bool Ball::GetisCollision()
+{
+	return isCollision;
 }

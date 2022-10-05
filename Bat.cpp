@@ -5,7 +5,7 @@ Bat::Bat() : speed(0)
 {
     shape.setSize({ 300.f, 5.f });
     shape.setPosition(position);
-    shape.setFillColor(Color(0, 130, 0, 255));
+    shape.setFillColor(Color(200, 0, 0, 255));
 }
 
 Bat::~Bat()

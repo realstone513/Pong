@@ -25,6 +25,19 @@ int main()
     ball.SetOrigin(Origins::BC);
     ball.SetPosition(initPos);
 
+    Font font;
+    font.loadFromFile("fonts/DS-DIGI.TTF");
+
+    Text hud;
+    hud.setFont(font);
+    hud.setCharacterSize(75);
+    hud.setFillColor(Color::White);
+    hud.setPosition({ 20, 20 });
+
+    bool ballActive = true;
+    int life = 3;
+    int score = 0;
+
     InputManager::Init();
     Clock clock;
     while (window.isOpen())
@@ -39,38 +52,72 @@ int main()
 
             InputManager::UpdateInput(event);
         }
-        if (Keyboard::isKeyPressed(Keyboard::Key::Space))
+        if (InputManager::GetKeyDown(Keyboard::Key::Space))
         {
-            ball.Fire(Utils::Normalize({ 1, -1 }), 1500.f);
+            ball.Fire(Utils::Normalize({ 0, 1 }), 2000.f);
+            ballActive = true;
+        }
+
+        if (InputManager::GetKeyDown(Keyboard::Key::Escape))
+        {
+            window.close();
         }
 
         bat.Update(dt.asSeconds());
+
+        if (!ballActive)
+        {
+            ball.SetPosition(bat.GetPosition());
+            ball.Fire({ 0, 0 }, 0);
+        }
+
         ball.Update(dt.asSeconds());
 
         // 충돌처리
-        FloatRect ballRect = ball.GetBounds();
+        if (ballActive)
+        {
+            if (!ball.GetisCollision())
+            {
+                FloatRect ballRect = ball.GetBounds();
 
-        if (ballRect.top < 0.f)
-        {
-            ball.OnCollisionTop();
-        }
-        if (ballRect.left < 0.f || ballRect.left + ballRect.width > width)
-        {
-            ball.OnCollisionSides();
-        }
-        if (ballRect.top + ballRect.height > height)
-        {
-            ball.OnCollisionBottom();
-        }
-        if (ballRect.intersects(bat.GetBounds()))
-        {
-            ball.OnCollisionBat();
+                if (ballRect.top < height * 0.5f)//< 0.f)
+                {
+                    ball.OnCollisionTop();
+                }
+                else if (ballRect.left < 0.f ||
+                    ballRect.left + ballRect.width > width)
+                {
+                    ball.OnCollisionSides();
+                }
+                else if (ballRect.top + ballRect.height > height)
+                {
+                    ball.OnCollisionBottom();
+                    ballActive = false;
+
+                    life--;
+                    if (life <= 0)
+                    {
+                        score = 0;
+                        life = 3;
+                    }
+                }
+                else if (ballRect.intersects(bat.GetBounds()))
+                {
+                    ball.OnCollisionBat();
+                    score++;
+                }
+            }
         }
 
+        string hudText =
+            "Score: " + to_string(score) +
+            "\tLife: " + to_string(life);
+        hud.setString(hudText);
 
         window.clear();
         bat.Draw(window);
         ball.Draw(window);
+        window.draw(hud);
         window.display();
     }
 

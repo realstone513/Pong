@@ -21,6 +21,15 @@ void Utils::SetOrigin(Sprite& obj, Origins origin)
 	obj.setOrigin(originPos);
 }
 
+void Utils::SetOrigin(Shape& obj, Origins origin)
+{
+	FloatRect bounds = obj.getLocalBounds();
+	Vector2f originPos;
+	originPos.x = bounds.width * ((int)origin % 3) * 0.5f;
+	originPos.y = bounds.height * ((int)origin / 3) * 0.5f;
+	obj.setOrigin(originPos);
+}
+
 int Utils::Range(int min, int maxInclude)
 {
 	return (gen() % (maxInclude - min + 1)) + min;
@@ -45,5 +54,8 @@ float Utils::SqrMagnitude(const Vector2f& vec)
 
 Vector2f Utils::Normalize(const Vector2f& vec)
 {
-	return Vector2f();
+	float mag = Magnitude(vec);
+	if (mag == 0)
+		return { 0, 0 };
+	return vec / mag;
 }

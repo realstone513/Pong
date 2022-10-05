@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Utils.h"
 
 using namespace sf;
 
@@ -9,19 +10,19 @@ private:
 	Vector2f position;
 	RectangleShape shape;
 	float speed;
-	Vector2f currentDir;
-
+	Vector2f curDir;
 
 public:
 	Bat();
 	~Bat();
 
-	Vector2f GetPosition() const;
-	void SetPosition(Vector2f position);
-
 	float GetSpeed() const;
 	void SetSpeed(float speed);
 
+	void SetOrigin(Origins origin);
+
+	Vector2f GetPosition() const;
+	void SetPosition(Vector2f position);
 
 	FloatRect GetBounds() const;
 

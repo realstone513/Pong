@@ -12,16 +12,6 @@ Bat::~Bat()
 {
 }
 
-Vector2f Bat::GetPosition() const
-{
-    return position;
-}
-
-void Bat::SetPosition(Vector2f position)
-{
-    this->position = position;
-}
-
 float Bat::GetSpeed() const
 {
     return speed;
@@ -32,6 +22,21 @@ void Bat::SetSpeed(float speed)
     this->speed = speed;
 }
 
+void Bat::SetOrigin(Origins origin)
+{
+    Utils::SetOrigin(shape, origin);
+}
+
+Vector2f Bat::GetPosition() const
+{
+    return position;
+}
+
+void Bat::SetPosition(Vector2f position)
+{
+    this->position = position;
+}
+
 FloatRect Bat::GetBounds() const
 {
     return shape.getGlobalBounds();
@@ -39,11 +44,10 @@ FloatRect Bat::GetBounds() const
 
 void Bat::Update(float dt)
 {
-    currentDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
+    curDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
 
-    position += currentDir * speed * dt;
+    position += curDir * speed * dt;
     shape.setPosition(position);
-
 }
 
 void Bat::Draw(RenderWindow& window)

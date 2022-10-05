@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "Ball.h"
 #include "Bat.h"
+#include "Utils.h"
 #include <iostream>
 
 using namespace sf;
@@ -13,12 +14,16 @@ int main()
     int height = 720;
     sf::RenderWindow window(sf::VideoMode(width, height), "Pong!", Style::Default);
 
-    Ball ball;
-    ball.SetPosition({ width / 2.f, width / 2.f });
+    Vector2f initPos(width * 0.5f, height - 25.f);
 
     Bat bat;
-    bat.SetPosition({ width * 0.5f, height - 20.f });
+    bat.SetOrigin(Origins::TC);
+    bat.SetPosition(initPos);
     bat.SetSpeed(1000.f);
+
+    Ball ball;
+    ball.SetOrigin(Origins::BC);
+    ball.SetPosition(initPos);
 
     InputManager::Init();
     Clock clock;
@@ -36,17 +41,15 @@ int main()
         }
         if (Keyboard::isKeyPressed(Keyboard::Key::Space))
         {
-            ball.Fire({ 0,1 }, 1500.f);
+            ball.Fire(Utils::Normalize({ 1, -1 }), 100.f);
         }
 
+        bat.Update(dt.asSeconds());
         ball.Update(dt.asSeconds());
 
         window.clear();
-        ball.Draw(window);
-
-
-        bat.Update(dt.asSeconds());
         bat.Draw(window);
+        ball.Draw(window);
         window.display();
     }
 

@@ -28,6 +28,7 @@ private:
     static vector<bool> ingList;
     static vector<bool> upList;
     static vector<int> ingIdx;
+
 public:
     static void Init();
     static void ClearInput();

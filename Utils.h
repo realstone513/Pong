@@ -20,6 +20,7 @@ private:
 public:
 	static void SetOrigin(Text& obj, Origins origin);
 	static void SetOrigin(Sprite& obj, Origins origin);
+	static void SetOrigin(Shape& obj, Origins origin);
 
 	static int Range(int min, int maxInclude);
 	static float Range(float min, float maxInclude);

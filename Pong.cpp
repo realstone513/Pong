@@ -1,7 +1,11 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "Ball.h"
+#include "Bat.h"
 #include <iostream>
+
+using namespace sf;
+using namespace std;
 
 int main()
 {
@@ -12,13 +16,16 @@ int main()
     Ball ball;
     ball.SetPosition({ width / 2.f, width / 2.f });
 
+    Bat bat;
+    bat.SetPosition({ width * 0.5f, height - 20.f });
+    bat.SetSpeed(1000.f);
+
     InputManager::Init();
     Clock clock;
     while (window.isOpen())
     {
         Time dt = clock.restart();
-        sf::Event event;
-        
+        Event event;
         InputManager::ClearInput();
         while (window.pollEvent(event))
         {
@@ -36,6 +43,10 @@ int main()
 
         window.clear();
         ball.Draw(window);
+
+
+        bat.Update(dt.asSeconds());
+        bat.Draw(window);
         window.display();
     }
 

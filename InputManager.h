@@ -24,9 +24,9 @@ class InputManager
 {
 private:
     static map<Axis, AxisInfo> axisInfoMap;
-    static vector<bool> downList;  
-    static vector<bool> ingList;   
-    static vector<bool> upList;    
+    static vector<bool> downList;
+    static vector<bool> ingList;
+    static vector<bool> upList;
     static vector<int> ingIdx;
 public:
     static void Init();

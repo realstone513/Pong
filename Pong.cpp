@@ -41,11 +41,32 @@ int main()
         }
         if (Keyboard::isKeyPressed(Keyboard::Key::Space))
         {
-            ball.Fire(Utils::Normalize({ 1, -1 }), 100.f);
+            ball.Fire(Utils::Normalize({ 1, -1 }), 1500.f);
         }
 
         bat.Update(dt.asSeconds());
         ball.Update(dt.asSeconds());
+
+        // 충돌처리
+        FloatRect ballRect = ball.GetBounds();
+
+        if (ballRect.top < 0.f)
+        {
+            ball.OnCollisionTop();
+        }
+        if (ballRect.left < 0.f || ballRect.left + ballRect.width > width)
+        {
+            ball.OnCollisionSides();
+        }
+        if (ballRect.top + ballRect.height > height)
+        {
+            ball.OnCollisionBottom();
+        }
+        if (ballRect.intersects(bat.GetBounds()))
+        {
+            ball.OnCollisionBat();
+        }
+
 
         window.clear();
         bat.Draw(window);

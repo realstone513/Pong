@@ -3,7 +3,7 @@
 
 Bat::Bat() : speed(0)
 {
-    shape.setSize({ 100.f, 5.f });
+    shape.setSize({ 300.f, 5.f });
     shape.setPosition(position);
     shape.setFillColor(Color(0, 130, 0, 255));
 }

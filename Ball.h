@@ -28,6 +28,12 @@ public:
 
 	FloatRect GetBounds() const;
 
+	void OnCollision();
+	void OnCollisionTop();
+	void OnCollisionSides();
+	void OnCollisionBottom();
+	void OnCollisionBat();
+
 	void Update(float dt);
 	void Draw(RenderWindow& window);
 };

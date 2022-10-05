@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include <iostream>
 
 Ball::Ball() : speed(0)
 { 
@@ -44,6 +45,32 @@ Vector2f Ball::GetPosition() const
 FloatRect Ball::GetBounds() const
 {
 	return shape.getGlobalBounds();
+}
+
+void Ball::OnCollision()
+{
+
+}
+
+void Ball::OnCollisionTop()
+{
+	curDir.y *= -1;
+}
+
+void Ball::OnCollisionSides()
+{
+	curDir.x *= -1;
+}
+
+void Ball::OnCollisionBottom()
+{
+	std::cout << "die" << std::endl;
+}
+
+void Ball::OnCollisionBat()
+{
+	std::cout << "bat" << std::endl;
+	curDir.y *= -1;
 }
 
 void Ball::Update(float dt)

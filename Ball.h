@@ -3,6 +3,7 @@
 #include "Utils.h"
 
 using namespace sf;
+using namespace std;
 
 class Ball
 {
@@ -11,7 +12,6 @@ private:
 	Vector2f position;
 	float speed;
 	Vector2f curDir;
-	bool isCollision;
 
 public:
 	Ball();
@@ -29,15 +29,11 @@ public:
 
 	FloatRect GetBounds() const;
 
-	void OnCollision();
 	void OnCollisionTop();
-	void OnCollisionSides();
+	void OnCollisionSides(float width);
 	void OnCollisionBottom();
 	void OnCollisionBat();
 
 	void Update(float dt);
 	void Draw(RenderWindow& window);
-
-	void SetisCollision(bool col);
-	bool GetisCollision();
 };

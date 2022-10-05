@@ -1,5 +1,5 @@
 #include "Bat.h"
-#include "InputMgr.h"
+#include "InputManager.h"
 
 Bat::Bat() : speed(0)
 {
@@ -39,7 +39,7 @@ FloatRect Bat::GetBounds() const
 
 void Bat::Update(float dt)
 {
-    currentDir.x = InputMgr::GetAxisRaw(Axis::Horizontal);
+    currentDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
 
     position += currentDir * speed * dt;
     shape.setPosition(position);

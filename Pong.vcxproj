@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Pong.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

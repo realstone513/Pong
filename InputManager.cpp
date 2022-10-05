@@ -34,7 +34,6 @@ void InputManager::ClearInput()
         upList[idx] = false;
     }
     ingIdx.clear();
-
 }
 
 void InputManager::UpdateInput(Event& ev)

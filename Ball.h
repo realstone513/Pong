@@ -3,6 +3,7 @@
 #include "Utils.h"
 
 using namespace sf;
+using namespace std;
 
 class Ball
 {
@@ -28,9 +29,8 @@ public:
 
 	FloatRect GetBounds() const;
 
-	void OnCollision();
 	void OnCollisionTop();
-	void OnCollisionSides();
+	void OnCollisionSides(float width);
 	void OnCollisionBottom();
 	void OnCollisionBat();
 

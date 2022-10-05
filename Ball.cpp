@@ -1,8 +1,9 @@
 #include "Ball.h"
 #include <iostream>
 
-Ball::Ball() : speed(0)
-{ 
+Ball::Ball()
+	: speed(0)
+{
 	shape.setRadius(10.f);
 	shape.setPosition(position);
 }
@@ -47,19 +48,21 @@ FloatRect Ball::GetBounds() const
 	return shape.getGlobalBounds();
 }
 
-void Ball::OnCollision()
-{
-
-}
-
 void Ball::OnCollisionTop()
 {
-	curDir.y *= -1;
+	std::cout << "top" << std::endl;
+	curDir.y = -curDir.y;
+	SetPosition({ position.x, position.y + shape.getRadius() });
 }
 
-void Ball::OnCollisionSides()
+void Ball::OnCollisionSides(float width)
 {
-	curDir.x *= -1;
+	std::cout << "side" << std::endl;
+	curDir.x = -curDir.x;
+	if (position.x < width * 0.5f)
+		SetPosition({ position.x + shape.getRadius(), position.y });
+	else
+		SetPosition({ position.x - shape.getRadius(), position.y });
 }
 
 void Ball::OnCollisionBottom()
@@ -70,7 +73,8 @@ void Ball::OnCollisionBottom()
 void Ball::OnCollisionBat()
 {
 	std::cout << "bat" << std::endl;
-	curDir.y *= -1;
+	curDir.y = -curDir.y;
+	SetPosition({ position.x, position.y - shape.getRadius() });
 }
 
 void Ball::Update(float dt)

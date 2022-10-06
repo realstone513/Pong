@@ -74,6 +74,11 @@ void Ball::OnCollisionBat()
 	SetPosition({ position.x, position.y - shape.getRadius() });
 }
 
+void Ball::OnCollisionBlock(Block* block)
+{
+//	curDir.y = -curDir.y;
+}
+
 void Ball::Update(float dt)
 {
 	position += curDir * speed * dt;

@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Utils.h"
+#include "Block.h"
 
 using namespace sf;
 using namespace std;
@@ -33,6 +34,7 @@ public:
 	void OnCollisionSides(float width);
 	void OnCollisionBottom();
 	void OnCollisionBat();
+	void OnCollisionBlock(Block* block);
 
 	void Update(float dt);
 	void Draw(RenderWindow& window);

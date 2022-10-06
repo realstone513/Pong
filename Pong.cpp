@@ -42,22 +42,7 @@ int main()
 	int score = 0;
 
 	BlockGenerator bg(width, 15, 15);
-
-	// generate blocks
 	list<Block*> blocks = bg.GetBlocks();
-	//int offset = 2;
-	//int nextY = 100;
-	//for (int y = 0; y < 10; y++)
-	//{
-	//	int nextX = offset;
-	//	for (int x = 0; x < 15; x++)
-	//	{
-	//		Block* block = new Block(nextX, nextY);
-	//		blocks.push_back(block);
-	//		nextX += 38 + offset;
-	//	}
-	//	nextY += 30 + offset;
-	//}
 
 	InputManager::Init();
 	Clock clock;
@@ -129,7 +114,10 @@ int main()
 			{
 				if (ballRect.intersects((*it)->GetBounds()))
 				{
+					ball.OnCollisionBlock(*it);
+					delete (*it);
 					it = blocks.erase(it);
+					break;
 				}
 				else
 					it++;

@@ -2,7 +2,10 @@
 #include "InputManager.h"
 #include "Ball.h"
 #include "Bat.h"
+#include "Block.h"
+#include "BlockGenerator.h"
 #include "Utils.h"
+#include <list>
 #include <iostream>
 
 using namespace sf;
@@ -32,15 +35,32 @@ int main()
 	hud.setFont(font);
 	hud.setCharacterSize(75);
 	hud.setFillColor(Color::White);
-	hud.setPosition({ 20, 20 });
+	hud.setPosition({ 20, 10 });
 
 	bool ballActive = true;
 	int life = 3;
 	int score = 0;
 
+	BlockGenerator bg(width, 15, 15);
+
+	// generate blocks
+	list<Block*> blocks = bg.GetBlocks();
+	//int offset = 2;
+	//int nextY = 100;
+	//for (int y = 0; y < 10; y++)
+	//{
+	//	int nextX = offset;
+	//	for (int x = 0; x < 15; x++)
+	//	{
+	//		Block* block = new Block(nextX, nextY);
+	//		blocks.push_back(block);
+	//		nextX += 38 + offset;
+	//	}
+	//	nextY += 30 + offset;
+	//}
+
 	InputManager::Init();
 	Clock clock;
-
 	while (window.isOpen())
 	{
 		Time dt = clock.restart();
@@ -79,7 +99,7 @@ int main()
 		if (ballActive)
 		{
 			FloatRect ballRect = ball.GetBounds();
-			if (ballRect.top < 0.f)
+			if (ballRect.top < 100.f)
 			{
 				ball.OnCollisionTop();
 			}
@@ -105,6 +125,15 @@ int main()
 				ball.OnCollisionBat();
 				score++;
 			}
+			for (auto it = blocks.begin(); it != blocks.end();)
+			{
+				if (ballRect.intersects((*it)->GetBounds()))
+				{
+					it = blocks.erase(it);
+				}
+				else
+					it++;
+			}
 		}
 
 		string hudText =
@@ -113,6 +142,10 @@ int main()
 		hud.setString(hudText);
 
 		window.clear();
+		for (auto i : blocks)
+		{
+			i->Draw(window);
+		}
 		bat.Draw(window);
 		ball.Draw(window);
 		window.draw(hud);

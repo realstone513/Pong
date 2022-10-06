@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BlockGenerator.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Pong.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -28,6 +30,8 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="BlockGenerator.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

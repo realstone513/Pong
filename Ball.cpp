@@ -50,14 +50,12 @@ FloatRect Ball::GetBounds() const
 
 void Ball::OnCollisionTop()
 {
-	std::cout << "top" << std::endl;
 	curDir.y = -curDir.y;
 	SetPosition({ position.x, position.y + shape.getRadius() });
 }
 
 void Ball::OnCollisionSides(float width)
 {
-	std::cout << "side" << std::endl;
 	curDir.x = -curDir.x;
 	if (position.x < width * 0.5f)
 		SetPosition({ position.x + shape.getRadius(), position.y });
@@ -72,7 +70,6 @@ void Ball::OnCollisionBottom()
 
 void Ball::OnCollisionBat()
 {
-	std::cout << "bat" << std::endl;
 	curDir.y = -curDir.y;
 	SetPosition({ position.x, position.y - shape.getRadius() });
 }

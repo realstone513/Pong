@@ -14,7 +14,7 @@ Ball::~Ball()
 
 void Ball::Fire(Vector2f dir, float speed)
 {
-	curDir = dir;
+	curDir = Utils::Normalize(dir);
 	this->speed = speed;
 }
 
@@ -76,7 +76,41 @@ void Ball::OnCollisionBat()
 
 void Ball::OnCollisionBlock(Block* block)
 {
-//	curDir.y = -curDir.y;
+	Vector2f blockCenterPosition = block->GetCenterPos();
+
+	/*cout << "Ball position: (" << position.x << ", " << position.y << ")" << endl;
+	cout << "Block position: (" << blockCenterPosition.x <<
+		", " << blockCenterPosition.y << ")" << endl;*/
+	float curTheta = Utils::GetAngleBetweenTwoVec(
+		blockCenterPosition - position, block->GetNormalVector());
+
+	float theta = block->GetTheta();
+	//cout << curTheta << " " << theta << endl;
+
+	if (curTheta < theta)
+	{
+		cout << "hit top" << endl << endl;
+		curDir.y = -curDir.y;
+		//SetPosition({ position.x, position.y - shape.getRadius() });
+	}
+	else if (curTheta > 180.f - theta)
+	{
+		cout << "hit bottom" << endl << endl;
+		curDir.y = -curDir.y;
+		//SetPosition({ position.x, position.y + shape.getRadius() });
+	}
+	else if (blockCenterPosition.x > position.x)
+	{
+		cout << "hit left" << endl << endl;
+		curDir.x = -curDir.x;
+		//SetPosition({ position.x - shape.getRadius(), position.y });
+	}
+	else 
+	{
+		cout << "hit right" << endl << endl;
+		curDir.x = -curDir.x;
+		//SetPosition({ position.x + shape.getRadius(), position.y });
+	}
 }
 
 void Ball::Update(float dt)

@@ -41,8 +41,12 @@ int main()
 	int life = 3;
 	int score = 0;
 
-	BlockGenerator bg(width, 15, 15);
+	BlockGenerator bg(width, 15,10, 1);
 	list<Block*> blocks = bg.GetBlocks();
+
+	RectangleShape ceil(Vector2f(width, 2));
+	ceil.setFillColor(Color::Red);
+	ceil.setPosition(0, 96);
 
 	InputManager::Init();
 	Clock clock;
@@ -61,7 +65,7 @@ int main()
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		{
-			ball.Fire(Utils::Normalize({ 1, -1 }), 2500.f);
+			ball.Fire(Utils::Normalize({ 1, -1 }), 1000.f);
 			ballActive = true;
 		}
 
@@ -137,6 +141,8 @@ int main()
 		bat.Draw(window);
 		ball.Draw(window);
 		window.draw(hud);
+
+		window.draw(ceil);
 		window.display();
 	}
 

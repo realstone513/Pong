@@ -1,5 +1,8 @@
 #include "Utils.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 std::random_device Utils::rd;
 std::mt19937 Utils::gen(Utils::rd());
 
@@ -49,7 +52,7 @@ float Utils::Magnitude(const Vector2f& vec)
 
 float Utils::SqrMagnitude(const Vector2f& vec)
 {
-	return vec.x * vec.x + vec.y * vec.y;
+	return DotProduct2d(vec, vec);
 }
 
 Vector2f Utils::Normalize(const Vector2f& vec)
@@ -58,4 +61,14 @@ Vector2f Utils::Normalize(const Vector2f& vec)
 	if (mag == 0)
 		return { 0, 0 };
 	return vec / mag;
+}
+
+float Utils::DotProduct2d(const Vector2f& vec1, const Vector2f& vec2)
+{
+	return vec1.x * vec2.x + vec1.y * vec2.y;
+}
+
+float Utils::GetAngleBetweenTwoVec(const Vector2f& vec1, const Vector2f& vec2)
+{
+	return acos(DotProduct2d(vec1, vec2) / (Magnitude(vec1) * Magnitude(vec2))) / M_PI * 180.f;
 }

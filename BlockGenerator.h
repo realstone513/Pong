@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Block.h"
 #include <list>
+#include "Block.h"
 
 using namespace sf;
 using namespace std;

@@ -28,4 +28,8 @@ public:
 	static float Magnitude(const Vector2f& vec);
 	static float SqrMagnitude(const Vector2f& vec);
 	static Vector2f Normalize(const Vector2f& vec);
+	static float DotProduct2d(
+		const Vector2f& vec1, const Vector2f& vec2);
+	static float GetAngleBetweenTwoVec(
+		const Vector2f& vec1, const Vector2f& vec2);
 };

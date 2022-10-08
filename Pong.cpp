@@ -1,4 +1,5 @@
-﻿#include <SFML/Graphics.hpp>
+﻿#include "SFML_Framework/RealstoneFramework.h"
+#include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "Ball.h"
 #include "Bat.h"
@@ -65,7 +66,7 @@ int main()
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		{
-			ball.Fire(Utils::Normalize({ 2, -1 }), 1000.f);
+			ball.Fire(Utils::Normalize({ 2, -1 }), 1500.f);
 			ballActive = true;
 		}
 

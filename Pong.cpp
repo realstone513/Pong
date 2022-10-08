@@ -29,7 +29,7 @@ int main()
 	ball.SetPosition(initPos);
 
 	Font font;
-	font.loadFromFile("fonts/DS-DIGI.TTF");
+	font.loadFromFile("fonts/DNFBitBitTTF.ttf");
 
 	Text hud;
 	hud.setFont(font);
@@ -65,7 +65,7 @@ int main()
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		{
-			ball.Fire(Utils::Normalize({ 1, -1 }), 1000.f);
+			ball.Fire(Utils::Normalize({ 2, -1 }), 1000.f);
 			ballActive = true;
 		}
 

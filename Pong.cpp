@@ -1,11 +1,10 @@
-﻿#include "SFML_Framework/RealstoneFramework.h"
-#include <SFML/Graphics.hpp>
-#include "InputManager.h"
+﻿#include <SFML/Graphics.hpp>
+#include "Framework/InputManager.h"
 #include "Ball.h"
 #include "Bat.h"
 #include "Block.h"
 #include "BlockGenerator.h"
-#include "Utils.h"
+#include "Framework/Utils.h"
 #include <list>
 #include <iostream>
 
@@ -55,13 +54,13 @@ int main()
 	{
 		Time dt = clock.restart();
 		Event event;
-		InputManager::ClearInput();
+		InputManager::Update(dt.asSeconds());
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			InputManager::UpdateInput(event);
+			InputManager::ProcessInput(event);
 		}
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))

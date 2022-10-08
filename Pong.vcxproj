@@ -23,7 +23,17 @@
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockGenerator.cpp" />
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="DataTable\DataTable.cpp" />
+    <ClCompile Include="DataTable\DataTableManager.cpp" />
+    <ClCompile Include="DataTable\StringTable.cpp" />
+    <ClCompile Include="Framework\Framework.cpp" />
+    <ClCompile Include="Framework\InputManager.cpp" />
+    <ClCompile Include="Framework\ResourceManager.cpp" />
+    <ClCompile Include="Framework\SoundManager.cpp" />
+    <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="GameObject\Object.cpp" />
+    <ClCompile Include="GameObject\SpriteObject.cpp" />
+    <ClCompile Include="GameObject\TextObject.cpp" />
     <ClCompile Include="Pong.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -32,15 +42,33 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Scenes\Scene.cpp" />
+    <ClCompile Include="Scenes\SceneDev1.cpp" />
+    <ClCompile Include="Scenes\SceneDev2.cpp" />
+    <ClCompile Include="Scenes\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="3rd\rapidcsv.h" />
+    <ClInclude Include="3rd\SingleTon.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockGenerator.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="DataTable\DataTable.h" />
+    <ClInclude Include="DataTable\DataTableManager.h" />
+    <ClInclude Include="DataTable\StringTable.h" />
+    <ClInclude Include="Framework\Framework.h" />
+    <ClInclude Include="Framework\InputManager.h" />
+    <ClInclude Include="Framework\ResourceManager.h" />
+    <ClInclude Include="Framework\SoundManager.h" />
+    <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="GameObject\Object.h" />
+    <ClInclude Include="GameObject\SpriteObject.h" />
+    <ClInclude Include="GameObject\TextObject.h" />
+    <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\SceneDev1.h" />
+    <ClInclude Include="Scenes\SceneDev2.h" />
+    <ClInclude Include="Scenes\SceneManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -160,6 +188,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./SFML_Framework/;./SFML_Framework/SFML-2.5.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

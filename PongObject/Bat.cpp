@@ -1,9 +1,9 @@
 #include "Bat.h"
-#include "Framework/InputManager.h"
+#include "../Framework/InputManager.h"
 
 Bat::Bat() : speed(0)
 {
-    shape.setSize({ 600.f, 5.f });
+    shape.setSize({ 1000.f, 5.f });
     shape.setPosition(position);
     shape.setFillColor(Color(200, 0, 0, 255));
 }
@@ -25,16 +25,6 @@ void Bat::SetSpeed(float speed)
 void Bat::SetOrigin(Origins origin)
 {
     Utils::SetOrigin(shape, origin);
-}
-
-Vector2f Bat::GetPosition() const
-{
-    return position;
-}
-
-void Bat::SetPosition(Vector2f position)
-{
-    this->position = position;
 }
 
 FloatRect Bat::GetBounds() const

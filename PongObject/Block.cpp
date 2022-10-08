@@ -1,5 +1,5 @@
 #include "Block.h"
-#include "Framework/Utils.h"
+#include "../Framework/Utils.h"
 
 Block::Block(float x, float y, Vector2f size)
 	: centerPos(x + size.x * 0.5f, y + size.y * 0.5f), normalVector(0, 1)
@@ -24,10 +24,6 @@ void Block::Update(float dt)
 void Block::Draw(RenderWindow& window)
 {
 	window.draw(shape);
-}
-
-void Block::Destroy()
-{
 }
 
 FloatRect Block::GetBounds() const

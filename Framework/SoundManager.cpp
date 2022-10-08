@@ -64,7 +64,7 @@ void SoundManager::StopAll()
 	}
 }
 
-void SoundManager::Update()
+void SoundManager::Update(float dt)
 {
 	auto it = playing.begin();
 	while (it != playing.end())

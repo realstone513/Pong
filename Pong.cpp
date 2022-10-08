@@ -1,11 +1,11 @@
-﻿#include <SFML/Graphics.hpp>
-#include "Framework/InputManager.h"
-#include "Ball.h"
-#include "Bat.h"
-#include "Block.h"
-#include "BlockGenerator.h"
-#include "Framework/Utils.h"
+﻿#include "Frameworks.h"
 #include <list>
+
+#include "PongObject/Ball.h"
+#include "PongObject/Bat.h"
+#include "PongObject/Block.h"
+#include "PongObject/BlockGenerator.h"
+
 #include <iostream>
 
 using namespace sf;
@@ -13,8 +13,11 @@ using namespace std;
 
 int main()
 {
-	int width = 600;
-	int height = 900;
+	//FRAMEWORK->Init(1000, 1000);
+	//FRAMEWORK->Do();
+
+	int width = 1000;
+	int height = 800;
 	sf::RenderWindow window(sf::VideoMode(width, height), "Pong!", Style::Default);
 
 	Vector2f initPos(width * 0.5f, height - 25.f);
@@ -41,8 +44,7 @@ int main()
 	int life = 3;
 	int score = 0;
 
-	BlockGenerator bg(width, 15,10, 1);
-	list<Block*> blocks = bg.GetBlocks();
+	list<Block*> blocks = BlockGenerator::GetBlocks(width, 40, 25, 1);
 
 	RectangleShape ceil(Vector2f(width, 2));
 	ceil.setFillColor(Color::Red);
@@ -65,7 +67,7 @@ int main()
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		{
-			ball.Fire(Utils::Normalize({ 2, -1 }), 1500.f);
+			ball.Fire(Utils::Normalize({ 1, -2 }), 1000.f);
 			ballActive = true;
 		}
 

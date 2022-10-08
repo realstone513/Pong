@@ -28,5 +28,5 @@ public:
 	void Play(string id, bool loop = false);
 	void StopAll();
 
-	void Update();
+	void Update(float dt);
 };

@@ -61,7 +61,7 @@ bool Framework::Do()
         }
 
         window.clear();
-        SOUND_MGR->Update();
+        SOUND_MGR->Update(dt);
         SCENE_MGR->Update(dt);
         SCENE_MGR->Draw(window);
         window.display();

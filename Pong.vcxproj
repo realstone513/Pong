@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Bat.cpp" />
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BlockGenerator.cpp" />
+    <ClCompile Include="PongObject\Ball.cpp" />
+    <ClCompile Include="PongObject\Bat.cpp" />
+    <ClCompile Include="PongObject\Block.cpp" />
+    <ClCompile Include="PongObject\BlockGenerator.cpp" />
     <ClCompile Include="DataTable\DataTable.cpp" />
     <ClCompile Include="DataTable\DataTableManager.cpp" />
     <ClCompile Include="DataTable\StringTable.cpp" />
@@ -50,13 +50,14 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Bat.h" />
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="BlockGenerator.h" />
+    <ClInclude Include="PongObject\Ball.h" />
+    <ClInclude Include="PongObject\Bat.h" />
+    <ClInclude Include="PongObject\Block.h" />
+    <ClInclude Include="PongObject\BlockGenerator.h" />
     <ClInclude Include="DataTable\DataTable.h" />
     <ClInclude Include="DataTable\DataTableManager.h" />
     <ClInclude Include="DataTable\StringTable.h" />
+    <ClInclude Include="Frameworks.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputManager.h" />
     <ClInclude Include="Framework\ResourceManager.h" />

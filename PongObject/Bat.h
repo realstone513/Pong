@@ -1,31 +1,28 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Framework/Utils.h"
+#include "../Framework/Utils.h"
+#include "../GameObject/Object.h"
 
 using namespace sf;
 
-class Bat
+class Bat : public Object
 {
 private:
-	Vector2f position;
 	RectangleShape shape;
 	float speed;
 	Vector2f curDir;
 
 public:
 	Bat();
-	~Bat();
+	virtual ~Bat();
+
+	virtual void Update(float dt);
+	virtual void Draw(RenderWindow& window);
 
 	float GetSpeed() const;
 	void SetSpeed(float speed);
 
 	void SetOrigin(Origins origin);
 
-	Vector2f GetPosition() const;
-	void SetPosition(Vector2f position);
-
 	FloatRect GetBounds() const;
-
-	void Update(float dt);
-	void Draw(RenderWindow& window);
 };

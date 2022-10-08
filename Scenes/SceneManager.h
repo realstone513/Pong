@@ -4,6 +4,8 @@
 #include <map>
 #include "../3rd/SingleTon.h"
 
+#define SCENE_MGR (SceneManager::GetInstance())
+
 using namespace sf;
 using namespace std;
 
@@ -20,5 +22,3 @@ public:
 	void Update(float dt);
 	void Draw(RenderWindow& window);
 };
-
-#define SCENE_MGR (SceneManager::GetInstance())

@@ -12,6 +12,17 @@ Ball::~Ball()
 {
 }
 
+void Ball::Update(float dt)
+{
+	position += curDir * speed * dt;
+	shape.setPosition(position);
+}
+
+void Ball::Draw(RenderWindow& window)
+{
+	window.draw(shape);
+}
+
 void Ball::Fire(Vector2f dir, float speed)
 {
 	curDir = Utils::Normalize(dir);
@@ -31,16 +42,6 @@ float Ball::GetSpeed() const
 void Ball::SetOrigin(Origins origin)
 {
 	Utils::SetOrigin(shape, origin);
-}
-
-void Ball::SetPosition(Vector2f position)
-{
-	this->position = position;
-}
-
-Vector2f Ball::GetPosition() const
-{
-	return position;
 }
 
 FloatRect Ball::GetBounds() const
@@ -111,15 +112,4 @@ void Ball::OnCollisionBlock(Block* block)
 		curDir.x = -curDir.x;
 		//SetPosition({ position.x + shape.getRadius(), position.y });
 	}
-}
-
-void Ball::Update(float dt)
-{
-	position += curDir * speed * dt;
-	shape.setPosition(position);
-}
-
-void Ball::Draw(RenderWindow& window)
-{
-	window.draw(shape);
 }

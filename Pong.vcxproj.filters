@@ -15,19 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp">
+    <ClCompile Include="PongObject\Ball.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Bat.cpp">
+    <ClCompile Include="PongObject\Bat.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Pong.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
+    <ClCompile Include="PongObject\Block.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BlockGenerator.cpp">
+    <ClCompile Include="PongObject\BlockGenerator.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="collisionTestMain.cpp">
@@ -80,16 +80,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h">
+    <ClInclude Include="PongObject\Ball.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Bat.h">
+    <ClInclude Include="PongObject\Bat.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Block.h">
+    <ClInclude Include="PongObject\Block.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGenerator.h">
+    <ClInclude Include="PongObject\BlockGenerator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="3rd\rapidcsv.h">
@@ -141,6 +141,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,13 +8,10 @@ using namespace std;
 
 class BlockGenerator
 {
-private:
-	list<Block*> blocks;
-
 public:
-	BlockGenerator(int width,
-		int rowCount = 15, int colCount = 10, int offset = 1);
+	BlockGenerator();
 	~BlockGenerator();
 
-	list<Block*> GetBlocks() const;
+	static list<Block*> GetBlocks(int width,
+		int rowCount = 15, int colCount = 10, int offset = 1);
 };

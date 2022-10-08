@@ -1,9 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../GameObject/Object.h"
 
 using namespace sf;
 
-class Block
+class Block : public Object
 {
 private:
 	RectangleShape shape;
@@ -14,11 +15,10 @@ private:
 
 public:
 	Block(float x, float y, Vector2f size);
-	~Block();
-
-	void Update(float dt);
-	void Draw(RenderWindow& window);
-	void Destroy();
+	virtual ~Block();
+	
+	virtual void Update(float dt);
+	virtual void Draw(RenderWindow& window);
 
 	FloatRect GetBounds() const;
 	Vector2f GetCenterPos() const;

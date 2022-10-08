@@ -3,7 +3,6 @@
 #include "../Framework/InputManager.h"
 #include "../Framework/ResourceManager.h"
 #include "../Framework/SoundManager.h"
-#include "../GameObject/TextObject.h"
 
 SceneDev1::SceneDev1()
 	:Scene(Scenes::Dev1)

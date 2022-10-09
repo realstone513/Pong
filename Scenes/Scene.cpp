@@ -8,7 +8,7 @@ Scene::~Scene()
 {
 }
 
-void Scene::Init()
+void Scene::Enter()
 {
     for (const auto& obj : objList)
     {
@@ -19,11 +19,6 @@ void Scene::Init()
     {
         obj->Init();
     }
-}
-
-void Scene::Enter()
-{
-    Init();
 }
 
 void Scene::Update(float dt)

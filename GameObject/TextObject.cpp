@@ -39,3 +39,8 @@ void TextObject::SetOrigin(Origins origin)
 {
     Utils::SetOrigin(text, origin);
 }
+
+void TextObject::SetString(string string)
+{
+    text.setString(string);
+}

@@ -25,7 +25,7 @@ public:
 	void Init();
 	void Release();
 
-	void Play(string id, bool loop = false);
+	void Play(string id, float volume = 100.f, bool loop = false);
 	void StopAll();
 
 	void Update(float dt);

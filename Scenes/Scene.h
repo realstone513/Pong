@@ -2,8 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include "../GameObject/Object.h"
-// test code
-#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -24,8 +22,6 @@ public:
 	Scene(Scenes type);
 	virtual ~Scene();
 
-
-    virtual void Init();
 	virtual void Enter();
     virtual void Update(float dt);
     virtual void Draw(RenderWindow& window);

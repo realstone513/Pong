@@ -20,6 +20,7 @@ int main()
 	FRAMEWORK->Do();
 	return 0;
 }
+
 	//sf::RenderWindow window(sf::VideoMode(width, height), "Pong!", Style::Default);
 
 	//Vector2f initPos(width * 0.5f, height - 25.f);

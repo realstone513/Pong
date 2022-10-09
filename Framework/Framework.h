@@ -25,4 +25,5 @@ public:
 
 	bool Init(int width, int height);
 	bool Do();
+	void Exit();
 };

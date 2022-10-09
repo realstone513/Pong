@@ -57,7 +57,7 @@ FloatRect Ball::GetBounds() const
 void Ball::OnCollisionTop()
 {
 	curDir.y = -curDir.y;
-	SetPosition({ position.x, position.y + shape.getRadius() });
+ 	SetPosition({ position.x, position.y }); // + shape.getRadius()
 }
 
 void Ball::OnCollisionSides(float width)

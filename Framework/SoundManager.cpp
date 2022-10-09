@@ -37,7 +37,7 @@ void SoundManager::Release()
 	playing.clear();
 }
 
-void SoundManager::Play(string id, bool loop)
+void SoundManager::Play(string id, float volume, bool loop)
 {
 	if (waiting.empty())
 	{
@@ -50,7 +50,7 @@ void SoundManager::Play(string id, bool loop)
 	SoundBuffer* sBuffer = RESOURCES_MGR->GetSoundBuffer(id);
 	sound->setBuffer(*sBuffer);
 	sound->setLoop(loop);
-	sound->setVolume(globalVolume);
+	sound->setVolume(globalVolume > volume ? volume : globalVolume);
 	sound->play();
 
 	playing.push_back(sound);

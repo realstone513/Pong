@@ -11,7 +11,7 @@ SceneDev1::~SceneDev1()
 {
 }
 
-void SceneDev1::Init()
+void SceneDev1::Enter()
 {
 	Vector2i wSize = FRAMEWORK->GetWindowSize() / 2;
 	string titleString = "PONG";
@@ -25,33 +25,32 @@ void SceneDev1::Init()
 	uiObjList.push_back(titleShadow);
 	uiObjList.push_back(title);
 
-	Scene::Init();
-}
-
-void SceneDev1::Enter()
-{
-	cout << "scene1 enter" << endl;
 	Scene::Enter();
-}
-
-void SceneDev1::Exit()
-{
-	Scene::Exit();
-	cout << "scene1 exit" << endl;
-    SOUND_MGR->StopAll();
 }
 
 void SceneDev1::Update(float dt)
 {
 	if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		SCENE_MGR->ChangeScene(Scenes::Dev2);
-    
-    Scene::Update(dt);
-	if (title->GetPosition().x > titleShadow->GetPosition().x - 20)
+
+	if (InputManager::GetKeyDown(Keyboard::Key::Escape))
+		FRAMEWORK->Exit();
+
+	if (title->GetPosition().x > titleShadow->GetPosition().x - 15)
 		titleShadow->Translate({ dt * 10, dt });
+    
+	Scene::Update(dt);
 }
 
 void SceneDev1::Draw(RenderWindow& window)
 {
     Scene::Draw(window);
+}
+
+void SceneDev1::Exit()
+{
+	cout << "scene1 exit" << endl;
+	SOUND_MGR->StopAll();
+
+	Scene::Exit();
 }

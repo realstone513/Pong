@@ -41,7 +41,7 @@ bool Framework::Init(int width, int height)
     SOUND_MGR->Init();
     DATATABLE_MGR->Init();
     SCENE_MGR->Init();
-    
+
     return true;
 }
 
@@ -68,4 +68,9 @@ bool Framework::Do()
     }
 
     return true;
+}
+
+void Framework::Exit()
+{
+    window.close();
 }

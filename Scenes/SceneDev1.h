@@ -13,9 +13,8 @@ public:
 	SceneDev1();
 	~SceneDev1();
 
-	virtual void Init() override;
 	virtual void Enter() override;
-	virtual void Exit() override;
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+	virtual void Exit() override;
 };

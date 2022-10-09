@@ -21,4 +21,5 @@ public:
     virtual void Translate(Vector2f delta) override;
 
     void SetOrigin(Origins origin);
+    void SetString(string string);
 };

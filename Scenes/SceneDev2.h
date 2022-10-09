@@ -13,6 +13,10 @@ protected:
 	TextObject* hud;
 	Bat* bat;
 	Ball* ball;
+	RectangleShape ceil;
+	list<Block*> blocks;
+	Vector2i wSize;
+
 	bool ballActive = true;
 	int life = 3;
 	int score = 0;
@@ -21,9 +25,8 @@ public:
 	SceneDev2();
 	~SceneDev2();
 
-	virtual void Init() override;
 	virtual void Enter() override;
-	virtual void Exit() override;
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+	virtual void Exit() override;
 };

@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "InputManager.h"
-#include "Ball.h"
-#include "Bat.h"
-#include "Block.h"
-#include "BlockGenerator.h"
-#include "Utils.h"
+#include "Framework/InputManager.h"
+#include "PongObject/Ball.h"
+#include "PongObject/Bat.h"
+#include "PongObject/Block.h"
+#include "PongObject/BlockGenerator.h"
+#include "Framework/Utils.h"
 #include <list>
+#include <vector>
 #include <iostream>
 
 using namespace sf;
@@ -19,16 +20,19 @@ int main()
 
 	Vector2f initPos(width * 0.5f, height - 25.f);
 
-	Bat bat;
+	Bat bat(initPos);
 	bat.SetOrigin(Origins::TC);
 	bat.SetPosition(initPos);
 	bat.SetSpeed(1000.f);
 
-	Ball ball;
+	Ball ball(initPos);
 	ball.SetOrigin(Origins::BC);
 	ball.SetPosition(initPos);
 
-	Ball balls[7];
+	vector<Ball> balls;
+	for (int i = 0; i < 7; i++)
+		balls.push_back(Ball(initPos));
+
 	balls[0].SetOrigin(Origins::BC); // left
 	balls[0].SetPosition({ 100, 300 });
 
@@ -51,7 +55,7 @@ int main()
 	balls[6].SetPosition({ 500, 500 });
 
 	Font font;
-	font.loadFromFile("fonts/DS-DIGI.TTF");
+	font.loadFromFile("fonts/DNFBitBitTTF.ttf");
 
 	Text hud;
 	hud.setFont(font);
@@ -63,7 +67,7 @@ int main()
 	int life = 13;
 	int score = 5;
 
-	Block block(280.f, 290.f, { 40, 20 });
+	Block block(250.f, 275.f, { 100, 50 });
 	cout << block.GetCenterPos().x << " " << block.GetCenterPos().y << endl;
 
 	RectangleShape ceil(Vector2f(width, 2));
@@ -76,18 +80,18 @@ int main()
 	{
 		Time dt = clock.restart();
 		Event event;
-		InputManager::ClearInput();
+		InputManager::Update(dt.asSeconds());
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			InputManager::UpdateInput(event);
+			InputManager::ProcessInput(event);
 		}
 
 		if (InputManager::GetKeyDown(Keyboard::Key::Space))
 		{
-			ball.Fire({ 0, -1 }, 2500.f);
+			ball.Fire({ 1, -1 }, 1500.f);
 			ballActive = true;
 		}
 
@@ -149,7 +153,7 @@ int main()
 			{
 				balls[i].OnCollisionBlock(&block);
 				balls[i].SetSpeed(0);
-				/*if (i == 0)
+				if (i == 0)
 					balls[0].SetPosition({ 100, 300 });
 				if (i == 1)
 					balls[1].SetPosition({ 500, 300 });
@@ -162,7 +166,7 @@ int main()
 				if (i == 5)
 					balls[5].SetPosition({ 100, 500 });
 				if (i == 6)
-					balls[6].SetPosition({ 500, 500 });*/
+					balls[6].SetPosition({ 500, 500 });
 			}
 		}
 
@@ -200,11 +204,8 @@ int main()
 			if (ballRect.intersects(block.GetBounds()))
 			{
 				ball.OnCollisionBlock(&block);
-				/*ball.SetSpeed(0);
-				ball.SetPosition(initPos);*/
-				/*delete (*it);
-				it = blocks.erase(it);
-				break;*/
+				//ball.SetSpeed(0);
+				//ball.SetPosition(initPos);
 			}
 		}
 
@@ -214,10 +215,6 @@ int main()
 		hud.setString(hudText);
 
 		window.clear();
-		/*for (auto i : blocks)
-		{
-			i->Draw(window);
-		}*/
 
 		for (int i = 0; i < 7; i++)
 		{

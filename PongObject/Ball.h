@@ -1,11 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../Framework/Utils.h"
 #include "../GameObject/Object.h"
 #include "Block.h"
-
-using namespace sf;
-using namespace std;
 
 class Ball : public Object
 {

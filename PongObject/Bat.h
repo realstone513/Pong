@@ -1,9 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../Framework/Utils.h"
 #include "../GameObject/Object.h"
-
-using namespace sf;
 
 class Bat : public Object
 {

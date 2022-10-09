@@ -33,7 +33,7 @@ const Vector2i& Framework::GetWindowSize() const
 bool Framework::Init(int width, int height)
 {
     windowSize = { width, height };
-    window.create(VideoMode(width, height), "Game");
+    window.create(VideoMode(width, height), "Realstone's Pong");
 
     InputManager::Init();
   

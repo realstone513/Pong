@@ -12,9 +12,13 @@ public:
         float sizeX = 0, float sizeY = 0,
         Color textColor = Color::White,
         int textSize = 75);
-    virtual ~TextObject();
+    virtual ~TextObject() override;
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Draw(RenderWindow& window);
+    virtual void Init() override;
+    virtual void Update(float dt) override;
+    virtual void Draw(RenderWindow& window) override;
+
+    virtual void Translate(Vector2f delta) override;
+
+    void SetOrigin(Origins origin);
 };

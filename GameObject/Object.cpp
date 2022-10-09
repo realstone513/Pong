@@ -2,6 +2,15 @@
 
 int Object::objCount = 1;
 
+Object::Object(const Object& ref)
+{
+}
+
+Object& Object::operator=(const Object& ref)
+{
+    return *this;
+}
+
 Object::Object()
 {
     id = objCount++;
@@ -56,5 +65,4 @@ void Object::Draw(RenderWindow& window)
 
 void Object::Translate(Vector2f delta)
 {
-    SetPosition(position + delta);
 }

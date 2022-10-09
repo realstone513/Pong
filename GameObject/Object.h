@@ -18,6 +18,9 @@ protected:
 
     static int objCount;
 
+    Object(const Object& ref);
+    Object& operator= (const Object& ref);
+
 public:
     Object();
     virtual ~Object();
@@ -35,5 +38,5 @@ public:
     virtual void Update(float dt);
     virtual void Draw(RenderWindow& window);
 
-    void Translate(Vector2f delta);
+    virtual void Translate(Vector2f delta);
 };

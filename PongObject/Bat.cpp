@@ -1,15 +1,35 @@
 #include "Bat.h"
 #include "../Framework/InputManager.h"
 
-Bat::Bat() : speed(0)
+Bat::Bat(Vector2f _initPos) : speed(1000), initPos(_initPos)
 {
     shape.setSize({ 1000.f, 5.f });
     shape.setPosition(position);
-    shape.setFillColor(Color(200, 0, 0, 255));
+    shape.setFillColor(Color(120, 120, 120, 255));
 }
 
 Bat::~Bat()
 {
+}
+
+void Bat::Init()
+{
+    SetOrigin(Origins::TC);
+    SetPosition(initPos);
+    SetSpeed(1000.f);
+}
+
+void Bat::Update(float dt)
+{
+    curDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
+
+    position += curDir * speed * dt;
+    shape.setPosition(position);
+}
+
+void Bat::Draw(RenderWindow& window)
+{
+    window.draw(shape);
 }
 
 float Bat::GetSpeed() const
@@ -30,17 +50,4 @@ void Bat::SetOrigin(Origins origin)
 FloatRect Bat::GetBounds() const
 {
     return shape.getGlobalBounds();
-}
-
-void Bat::Update(float dt)
-{
-    curDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
-
-    position += curDir * speed * dt;
-    shape.setPosition(position);
-}
-
-void Bat::Draw(RenderWindow& window)
-{
-    window.draw(shape);
 }

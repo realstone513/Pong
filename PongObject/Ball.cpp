@@ -1,8 +1,7 @@
 #include "Ball.h"
 #include <iostream>
 
-Ball::Ball()
-	: speed(0)
+Ball::Ball(Vector2f _initPos) : speed(0), initPos(_initPos)
 {
 	shape.setRadius(10.f);
 	shape.setPosition(position);
@@ -10,6 +9,12 @@ Ball::Ball()
 
 Ball::~Ball()
 {
+}
+
+void Ball::Init()
+{
+	SetOrigin(Origins::BC);
+	SetPosition(initPos);
 }
 
 void Ball::Update(float dt)

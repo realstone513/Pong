@@ -8,11 +8,11 @@ protected:
 
 public:
     SpriteObject();
-    virtual ~SpriteObject();
+    virtual ~SpriteObject() override;
 
-    virtual void Init();
-    virtual void Update(float dt);
-    virtual void Draw(RenderWindow& window);
+    virtual void Init() override;
+    virtual void Update(float dt) override;
+    virtual void Draw(RenderWindow& window) override;
 
     void SetTexture(Texture& tex);
     void SetOrigin(Origins origin);

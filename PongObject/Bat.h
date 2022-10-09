@@ -11,11 +11,13 @@ private:
 	RectangleShape shape;
 	float speed;
 	Vector2f curDir;
+	const Vector2f initPos;
 
 public:
-	Bat();
+	Bat(Vector2f _initPos);
 	virtual ~Bat();
 
+	virtual void Init();
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);
 

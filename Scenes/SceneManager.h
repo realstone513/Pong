@@ -14,6 +14,7 @@ class SceneManager : public Singleton<SceneManager>
 private:
 	map<Scenes, Scene*> sceneMap;
 	Scenes currScene;
+
 public:
 	Scenes GetCurrScene() const;
 	Scene* GetScene(Scenes scene);

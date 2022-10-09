@@ -24,9 +24,10 @@ public:
 	Scene(Scenes type);
 	virtual ~Scene();
 
-	virtual void Enter() = 0;
-	virtual void Exit() = 0;
 
+    virtual void Init();
+	virtual void Enter();
     virtual void Update(float dt);
     virtual void Draw(RenderWindow& window);
+	virtual void Exit();
 };

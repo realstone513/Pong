@@ -6,6 +6,7 @@ TextObject::TextObject(Font& font, string textString,
     text.setFont(font);
     text.setString(textString);
     text.setPosition(sizeX, sizeY);
+    position = { sizeX, sizeY };
     text.setFillColor(textColor);
     text.setCharacterSize(textSize);
 }
@@ -18,11 +19,23 @@ void TextObject::Init()
 {
 }
 
-void TextObject::Update()
+void TextObject::Update(float dt)
 {
+    text.setPosition(position);
 }
 
 void TextObject::Draw(RenderWindow& window)
 {
     window.draw(text);
+}
+
+void TextObject::Translate(Vector2f delta)
+{
+    position.x += delta.x;
+    position.y += delta.y;
+}
+
+void TextObject::SetOrigin(Origins origin)
+{
+    Utils::SetOrigin(text, origin);
 }

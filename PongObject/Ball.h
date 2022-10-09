@@ -13,11 +13,13 @@ private:
 	CircleShape shape;
 	float speed;
 	Vector2f curDir;
+	const Vector2f initPos;
 
 public:
-	Ball();
+	Ball(Vector2f _initPos);
 	virtual ~Ball();
 
+	virtual void Init();
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);
 

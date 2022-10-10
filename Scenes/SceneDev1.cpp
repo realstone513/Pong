@@ -1,9 +1,10 @@
 #include "SceneDev1.h"
 #include "SceneManager.h"
 #include "../Frameworks.h"
+#include "../GameObject/SpriteObject.h"
 
 SceneDev1::SceneDev1()
-	:Scene(Scenes::Dev1)
+	: Scene(Scenes::Dev1)
 {
 }
 
@@ -13,11 +14,15 @@ SceneDev1::~SceneDev1()
 
 void SceneDev1::Enter()
 {
+	SpriteObject* background = new SpriteObject();
+	background->SetTexture(*RESOURCES_MGR->GetTexture("graphics/mokoko.png"));
+	objList.push_back(background);
+
 	Vector2i wSize = FRAMEWORK->GetWindowSize() / 2;
 	string titleString = "PONG";
 	float titleTextSize = 250;
 	title = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"),
-		titleString, wSize.x, wSize.y, Color(0, 200, 200, 255), 250);
+		titleString, wSize.x, wSize.y, Color(0, 204, 0, 255), 250);
 	titleShadow = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"),
 		titleString, wSize.x - 20, wSize.y + 10, Color(60, 60, 60, 255), 250);
 	title->SetOrigin(Origins::BC);

@@ -12,6 +12,7 @@ Object& Object::operator=(const Object& ref)
 }
 
 Object::Object()
+    : active(true)
 {
     id = objCount++;
     Init();

@@ -2,17 +2,26 @@
 #include "../Framework/Utils.h"
 #include <iostream>
 
-Block::Block(float x, float y, Vector2f size)
+Block::Block(float x, float y, Vector2f size, int blockType)
 	: centerPos(x + size.x * 0.5f, y + size.y * 0.5f), normalVector(0, 1),
-	duration(0.2f), timer(0.0f)
+	duration(0.15f), timer(0.0f), untouchable(false)
 {
+	colorArray.push_back(Color(102, 102, 102, 255));
+	colorArray.push_back(Color(0, 204, 0, 255));
+	colorArray.push_back(Color(0, 0, 204, 255));
+	colorArray.push_back(Color(102, 51, 204, 255));
+	colorArray.push_back(Color(255, 153, 0, 255));
+	colorArray.push_back(Color(255, 51, 0, 255));
+
+	hp = blockType < 6 ? blockType : 5;
+	if (blockType == 6)
+		untouchable = true;
 	shape.setPosition(x, y);
 	shape.setSize(size);
-	shape.setFillColor(Color(0, 130, 0, 255));
+	shape.setFillColor(colorArray[hp]);
 	shape.setOutlineColor(Color::White);
 	shape.setOutlineThickness(2.f);
 	theta = Utils::GetAngleBetweenTwoVec({ size.x * 0.5f, size.y * 0.5f }, normalVector);
-	hp = 1;
 }
 
 Block::~Block()
@@ -56,7 +65,13 @@ float Block::GetTheta() const
 
 void Block::Hit()
 {
+	if (untouchable)
+		return;
+	
 	hp--;
+	shape.setFillColor(colorArray[hp]);
+	if (hp == 0)
+		shape.setOutlineColor(Color::Black);
 	active = false;
 	timer = duration;
 }

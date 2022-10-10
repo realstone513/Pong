@@ -1,9 +1,10 @@
 #include "SceneDev2.h"
 #include "SceneManager.h"
 #include "../Frameworks.h"
+#include "../GameObject/SpriteObject.h"
 
 SceneDev2::SceneDev2()
-	: Scene(Scenes::Dev2), ballActive(false)
+	: Scene(Scenes::Dev2), ballActive(false), life(3), score(0), curStage(1), clearGame(false)
 {
 }
 
@@ -13,14 +14,23 @@ SceneDev2::~SceneDev2()
 
 void SceneDev2::Enter()
 {
+	SpriteObject* background = new SpriteObject();
+	background->SetTexture(*RESOURCES_MGR->GetTexture("graphics/mokoko.png"));
+	objList.push_back(background);
+
+	life = 3;
+	score = 0;
+	curStage = 1;
+
 	SOUND_MGR->Play("sound/pong_bgm.wav", 50.f, true);
 
 	wSize = FRAMEWORK->GetWindowSize();
-	bat = new Bat({ wSize.x * 0.5f, wSize.y - 25.f });
-	ball = new Ball({ wSize.x * 0.5f, wSize.y - 25.f });
+	initPos = { wSize.x * 0.5f, wSize.y - 25.f };
+	bat = new Bat(initPos);
+	ball = new Ball(initPos);
 	hud = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"), "", 10.f, 0.f);
-	blocks = BlockGenerator::GetBlocks(wSize.x, 20, 5, 1);
-
+	if (!bg.GetBlocks(blocks, wSize.x, curStage))
+		return;
 	ceil.setSize(Vector2f(wSize.x, 2));
 	ceil.setFillColor(Color::Cyan);
 	ceil.setPosition(0, 98);
@@ -28,9 +38,6 @@ void SceneDev2::Enter()
 	objList.push_back(bat);
 	objList.push_back(ball);
 	uiObjList.push_back(hud);
-
-	life = 3;
-	score = 0;
 
 	Scene::Enter();
 }
@@ -48,11 +55,31 @@ void SceneDev2::Update(float dt)
 	{
 		if (ballActive == false)
 		{
-			ball->Fire(Utils::Normalize({ 0, -1 }), 800.f);
+			ball->Fire(Utils::Normalize({ Utils::Random(-1.f, 1.f), -1 }), 800.f);
 			ballActive = true;
 		}
 	}
+
+	if (blocks.size() == 0 || InputManager::GetKeyDown(Keyboard::Key::C))
+	{
+		for (const auto& obj : blocks)
+		{
+			delete obj;
+		}
+		blocks.clear();
+		ball->Init();
+		bat->Init();
+		ballActive = false;
+
+		if (!bg.GetBlocks(blocks, wSize.x, ++curStage))
+			clearGame = true;
+	}
 	
+	if (clearGame)
+	{
+
+	}
+
 	if (!ballActive)
 	{
 		ball->SetPosition(bat->GetPosition());
@@ -77,10 +104,11 @@ void SceneDev2::Update(float dt)
 			ballActive = false;
 
 			life--;
+			ball->SetPosition(initPos);
 			if (life <= 0)
 			{
-				score = 0;
-				life = 3;
+				Exit();
+				Enter();
 			}
 		}
 		if (ballRect.intersects(bat->GetBounds()))
@@ -93,20 +121,14 @@ void SceneDev2::Update(float dt)
 			if (ballRect.intersects((*it)->GetBounds()))
 			{
 				ball->OnCollisionBlock(*it);
-				if ((*it)->hp == 1)
-				{
-					delete (*it);
-					it = blocks.erase(it);
+				(*it)->Hit();
+				if ((*it)->hp == 0)
 					SOUND_MGR->Play("sound/hit_soft_block.wav");
-					break;
-				}
 				else
-				{
-					(*it)->Hit();
-					hitBlocks.push_back(*it);
-					it = blocks.erase(it);
 					SOUND_MGR->Play("sound/hit_hard_block.wav");
-				}
+				hitBlocks.push_back(*it);
+				it = blocks.erase(it);
+				break;
 			}
 			else
 				it++;
@@ -118,7 +140,9 @@ void SceneDev2::Update(float dt)
 		(*it)->Update(dt);
 		if ((*it)->GetActive())
 		{
-			blocks.push_back(*it);
+			if ((*it)->hp > 0)
+				blocks.push_back(*it);
+			delete (*it);
 			it = hitBlocks.erase(it);
 		}
 		else
@@ -127,7 +151,7 @@ void SceneDev2::Update(float dt)
 
 	string hudText =
 		"Score: " + to_string(score) +
-		"\tLife: " + to_string(life);
+		"\t\t\t\t\tLife: " + to_string(life);
 	hud->SetString(hudText);
 
     Scene::Update(dt);
@@ -135,26 +159,31 @@ void SceneDev2::Update(float dt)
 
 void SceneDev2::Draw(RenderWindow& window)
 {
+	Scene::Draw(window);
+
 	for (const auto& obj : blocks)
 	{
 		if (obj->GetActive())
-		{
 			obj->Draw(window);
-		}
 	}
-	
+
 	for (const auto& obj : hitBlocks)
 	{
 		obj->Draw(window);
 	}
 	window.draw(ceil);
-
-	Scene::Draw(window);
 }
 
 void SceneDev2::Exit()
 {
 	cout << "scene2 exit" << endl;
 	SOUND_MGR->StopAll();
+
+	for (const auto& obj : blocks)
+	{
+		delete obj;
+	}
+	blocks.clear();
+
 	Scene::Exit();
 }

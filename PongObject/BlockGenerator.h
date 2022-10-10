@@ -2,16 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include "Block.h"
+#include <fstream>
+#include <vector>
+#include <string>
 
 using namespace sf;
 using namespace std;
 
 class BlockGenerator
 {
+private:
+	vector<string>* ReadFile(string path);
+
 public:
 	BlockGenerator();
 	~BlockGenerator();
 
-	static list<Block*> GetBlocks(int width,
-		int rowCount = 15, int colCount = 10, int offset = 1);
+	bool GetBlocks(list<Block*>& blocks, int width, int stageIdx);
 };

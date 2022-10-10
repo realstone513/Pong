@@ -11,16 +11,21 @@ class SceneDev2 : public Scene
 {
 protected:
 	TextObject* hud;
+	TextObject* clearText;
 	Bat* bat;
 	Ball* ball;
 	RectangleShape ceil;
 	list<Block*> blocks;
 	list<Block*> hitBlocks;
 	Vector2i wSize;
+	Vector2f initPos;
+	BlockGenerator bg;
 
-	bool ballActive = true;
-	int life = 3;
-	int score = 0;
+	bool ballActive;
+	int life;
+	int score;
+	int curStage;
+	bool clearGame;
 
 public:
 	SceneDev2();

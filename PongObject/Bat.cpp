@@ -3,7 +3,7 @@
 
 Bat::Bat(Vector2f _initPos) : speed(1000), initPos(_initPos)
 {
-    shape.setSize({ 200.f, 5.f });
+    shape.setSize({ 150.f, 10.f });
     shape.setPosition(position);
     shape.setFillColor(Color(120, 120, 120, 255));
 }
@@ -23,7 +23,9 @@ void Bat::Update(float dt)
 {
     curDir.x = InputManager::GetAxisRaw(Axis::Horizontal);
 
-    position += curDir * speed * dt;
+    if (!(position.x < 0 && curDir.x == -1) &&
+        !(position.x > initPos.x * 2 && curDir.x == 1))
+        position += curDir * speed * dt;
     shape.setPosition(position);
 }
 

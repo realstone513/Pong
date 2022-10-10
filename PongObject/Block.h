@@ -14,9 +14,12 @@ private:
 	float theta;
 	float duration;
 	float timer;
+	bool untouchable;
+
+	vector<Color> colorArray;
 
 public:
-	Block(float x, float y, Vector2f size);
+	Block(float x, float y, Vector2f size, int blockType);
 	virtual ~Block();
 	
 	virtual void Update(float dt);

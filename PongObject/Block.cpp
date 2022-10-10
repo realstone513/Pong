@@ -12,8 +12,9 @@ Block::Block(float x, float y, Vector2f size, int blockType)
 	colorArray.push_back(Color(102, 51, 204, 255));
 	colorArray.push_back(Color(255, 153, 0, 255));
 	colorArray.push_back(Color(255, 51, 0, 255));
+	colorArray.push_back(Color(0, 0, 0, 255));
 
-	hp = blockType < 6 ? blockType : 5;
+	hp = blockType;
 	if (blockType == 6)
 		untouchable = true;
 	shape.setPosition(x, y);
@@ -61,6 +62,11 @@ Vector2f Block::GetNormalVector() const
 float Block::GetTheta() const
 {
 	return theta;
+}
+
+bool Block::GetUntouchable()
+{
+	return untouchable;
 }
 
 void Block::Hit()

@@ -29,6 +29,7 @@ public:
 	Vector2f GetCenterPos() const;
 	Vector2f GetNormalVector() const;
 	float GetTheta() const;
+	bool GetUntouchable();
 	void Hit();
 	int hp;
 };

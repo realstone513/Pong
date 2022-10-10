@@ -25,6 +25,7 @@ protected:
 	int life;
 	int score;
 	int curStage;
+	int curStageUntouchableCount;
 	bool clearGame;
 
 public:

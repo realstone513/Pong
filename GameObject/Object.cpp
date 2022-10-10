@@ -30,7 +30,7 @@ int Object::GetObjectID()
 
 void Object::SetActive(bool active)
 {
-    active = active;
+    this->active = active;
 }
 
 bool Object::GetActive() const

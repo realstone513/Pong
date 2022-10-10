@@ -4,7 +4,8 @@
 #include "../GameObject/SpriteObject.h"
 
 SceneDev2::SceneDev2()
-	: Scene(Scenes::Dev2), ballActive(false), life(3), score(0), curStage(1), clearGame(false)
+	: Scene(Scenes::Dev2), ballActive(false), 
+	life(3), score(0), curStage(1), clearGame(false), curStageUntouchableCount(0)
 {
 }
 
@@ -29,8 +30,18 @@ void SceneDev2::Enter()
 	bat = new Bat(initPos);
 	ball = new Ball(initPos);
 	hud = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"), "", 10.f, 0.f);
+	clearText = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"),
+		"CLEAR!", wSize.x * 0.5f, wSize.y * 0.5f, Color::White, 250);
+	clearText->SetActive(false);
+	clearText->SetOrigin(Origins::MC);
 	if (!bg.GetBlocks(blocks, wSize.x, curStage))
-		return;
+		return; // 파일 읽기 실패(형식 잘못, 파일 없음)
+	
+	for (auto block : blocks)
+	{
+		if (block->GetUntouchable())
+			curStageUntouchableCount++;
+	}
 	ceil.setSize(Vector2f(wSize.x, 2));
 	ceil.setFillColor(Color::Cyan);
 	ceil.setPosition(0, 98);
@@ -38,6 +49,7 @@ void SceneDev2::Enter()
 	objList.push_back(bat);
 	objList.push_back(ball);
 	uiObjList.push_back(hud);
+	uiObjList.push_back(clearText);
 
 	Scene::Enter();
 }
@@ -60,7 +72,14 @@ void SceneDev2::Update(float dt)
 		}
 	}
 
-	if (blocks.size() == 0 || InputManager::GetKeyDown(Keyboard::Key::C))
+	if (InputManager::GetKeyDown(Keyboard::Key::R)) // Test
+	{
+		Exit();
+		Enter();
+	}
+
+	if (blocks.size() == curStageUntouchableCount ||
+		InputManager::GetKeyDown(Keyboard::Key::C)) // Test
 	{
 		for (const auto& obj : blocks)
 		{
@@ -73,11 +92,18 @@ void SceneDev2::Update(float dt)
 
 		if (!bg.GetBlocks(blocks, wSize.x, ++curStage))
 			clearGame = true;
+
+		curStageUntouchableCount = 0;
+		for (auto block : blocks)
+		{
+			if (block->GetUntouchable())
+				curStageUntouchableCount++;
+		}
 	}
 	
 	if (clearGame)
 	{
-
+		clearText->SetActive(true);
 	}
 
 	if (!ballActive)
@@ -104,7 +130,6 @@ void SceneDev2::Update(float dt)
 			ballActive = false;
 
 			life--;
-			ball->SetPosition(initPos);
 			if (life <= 0)
 			{
 				Exit();
@@ -142,7 +167,8 @@ void SceneDev2::Update(float dt)
 		{
 			if ((*it)->hp > 0)
 				blocks.push_back(*it);
-			delete (*it);
+			else
+				delete (*it);
 			it = hitBlocks.erase(it);
 		}
 		else
@@ -169,7 +195,8 @@ void SceneDev2::Draw(RenderWindow& window)
 
 	for (const auto& obj : hitBlocks)
 	{
-		obj->Draw(window);
+		if (obj->GetActive())
+			obj->Draw(window);
 	}
 	window.draw(ceil);
 }

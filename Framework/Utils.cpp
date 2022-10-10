@@ -50,6 +50,7 @@ float Utils::Magnitude(const Vector2f& vec)
 {
 	return sqrt(SqrMagnitude(vec));
 }
+
 float Utils::SqrMagnitude(const Vector2f& vec)
 {
 	return DotProduct2d(vec, vec);

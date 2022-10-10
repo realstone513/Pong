@@ -29,12 +29,12 @@ int Object::GetObjectID()
 
 void Object::SetActive(bool active)
 {
-    enabled = active;
+    active = active;
 }
 
 bool Object::GetActive() const
 {
-    return enabled;
+    return active;
 }
 
 void Object::SetPosition(Vector2f pos)

@@ -12,6 +12,8 @@ private:
 	Vector2f normalVector;
 	// normalVector와 중점에서 한 꼭짓점을 이은 벡터의 사이각
 	float theta;
+	float duration;
+	float timer;
 
 public:
 	Block(float x, float y, Vector2f size);
@@ -24,4 +26,6 @@ public:
 	Vector2f GetCenterPos() const;
 	Vector2f GetNormalVector() const;
 	float GetTheta() const;
+	void Hit();
+	int hp;
 };

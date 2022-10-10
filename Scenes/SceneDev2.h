@@ -15,6 +15,7 @@ protected:
 	Ball* ball;
 	RectangleShape ceil;
 	list<Block*> blocks;
+	list<Block*> hitBlocks;
 	Vector2i wSize;
 
 	bool ballActive = true;

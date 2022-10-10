@@ -57,7 +57,7 @@ FloatRect Ball::GetBounds() const
 void Ball::OnCollisionTop()
 {
 	curDir.y = -curDir.y;
- 	SetPosition({ position.x, position.y }); // + shape.getRadius()
+ 	SetPosition({ position.x, position.y + shape.getRadius() });
 }
 
 void Ball::OnCollisionSides(float width)
@@ -74,9 +74,16 @@ void Ball::OnCollisionBottom()
 	std::cout << "die" << std::endl;
 }
 
-void Ball::OnCollisionBat()
+void Ball::OnCollisionBat(Bat* bat)
 {
-	curDir.y = -curDir.y;
+	Vector2f batPosition = bat->GetPosition();
+	curDir.x = position.x - batPosition.x;
+	curDir.x *= 0.002f;
+	curDir.y = position.y - batPosition.y - 1.0f;
+
+	curDir = Utils::Normalize(curDir);
+	
+	//curDir.y = -curDir.y;
 	SetPosition({ position.x, position.y - shape.getRadius() });
 }
 
@@ -93,28 +100,31 @@ void Ball::OnCollisionBlock(Block* block)
 	float theta = block->GetTheta();
 	//cout << curTheta << " " << theta << endl;
 
+	if (!block->GetActive())
+		return ;
+
 	if (curTheta < theta)
 	{
-		cout << "hit top" << endl << endl;
+		cout << "hit top " << block->hp << endl << endl;
 		curDir.y = -curDir.y;
-		//SetPosition({ position.x, position.y - shape.getRadius() });
+		SetPosition({ position.x, position.y });
 	}
 	else if (curTheta > 180.f - theta)
 	{
-		cout << "hit bottom" << endl << endl;
+		cout << "hit bottom " << block->hp << endl << endl;
 		curDir.y = -curDir.y;
-		//SetPosition({ position.x, position.y + shape.getRadius() });
+		SetPosition({ position.x, position.y });
 	}
 	else if (blockCenterPosition.x > position.x)
 	{
-		cout << "hit left" << endl << endl;
+		cout << "hit left " << block->hp << endl << endl;
 		curDir.x = -curDir.x;
-		//SetPosition({ position.x - shape.getRadius(), position.y });
+		SetPosition({ position.x, position.y });
 	}
 	else 
 	{
-		cout << "hit right" << endl << endl;
+		cout << "hit right " << block->hp << endl << endl;
 		curDir.x = -curDir.x;
-		//SetPosition({ position.x + shape.getRadius(), position.y });
+		SetPosition({ position.x, position.y });
 	}
 }

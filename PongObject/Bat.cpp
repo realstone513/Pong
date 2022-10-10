@@ -3,7 +3,7 @@
 
 Bat::Bat(Vector2f _initPos) : speed(1000), initPos(_initPos)
 {
-    shape.setSize({ 1000.f, 5.f });
+    shape.setSize({ 200.f, 5.f });
     shape.setPosition(position);
     shape.setFillColor(Color(120, 120, 120, 255));
 }

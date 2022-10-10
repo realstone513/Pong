@@ -46,8 +46,11 @@ void SceneDev2::Update(float dt)
 
 	if (InputManager::GetKeyDown(Keyboard::Key::Space))
 	{
-		ball->Fire(Utils::Normalize({ 2, -1 }), 1000.f);
-		ballActive = true;
+		if (ballActive == false)
+		{
+			ball->Fire(Utils::Normalize({ 0, -1 }), 800.f);
+			ballActive = true;
+		}
 	}
 	
 	if (!ballActive)
@@ -82,7 +85,7 @@ void SceneDev2::Update(float dt)
 		}
 		if (ballRect.intersects(bat->GetBounds()))
 		{
-			ball->OnCollisionBat();
+			ball->OnCollisionBat(bat);
 			score++;
 		}
 		for (auto it = blocks.begin(); it != blocks.end();)
@@ -90,14 +93,36 @@ void SceneDev2::Update(float dt)
 			if (ballRect.intersects((*it)->GetBounds()))
 			{
 				ball->OnCollisionBlock(*it);
-				delete (*it);
-				it = blocks.erase(it);
-				SOUND_MGR->Play("sound/hit_soft_block.wav");
-				break;
+				if ((*it)->hp == 1)
+				{
+					delete (*it);
+					it = blocks.erase(it);
+					SOUND_MGR->Play("sound/hit_soft_block.wav");
+					break;
+				}
+				else
+				{
+					(*it)->Hit();
+					hitBlocks.push_back(*it);
+					it = blocks.erase(it);
+					SOUND_MGR->Play("sound/hit_hard_block.wav");
+				}
 			}
 			else
 				it++;
 		}
+	}
+
+	for (auto it = hitBlocks.begin(); it != hitBlocks.end();)
+	{
+		(*it)->Update(dt);
+		if ((*it)->GetActive())
+		{
+			blocks.push_back(*it);
+			it = hitBlocks.erase(it);
+		}
+		else
+			it++;
 	}
 
 	string hudText =
@@ -116,6 +141,11 @@ void SceneDev2::Draw(RenderWindow& window)
 		{
 			obj->Draw(window);
 		}
+	}
+	
+	for (const auto& obj : hitBlocks)
+	{
+		obj->Draw(window);
 	}
 	window.draw(ceil);
 

@@ -1,8 +1,10 @@
 #include "Block.h"
 #include "../Framework/Utils.h"
+#include <iostream>
 
 Block::Block(float x, float y, Vector2f size)
-	: centerPos(x + size.x * 0.5f, y + size.y * 0.5f), normalVector(0, 1)
+	: centerPos(x + size.x * 0.5f, y + size.y * 0.5f), normalVector(0, 1),
+	duration(0.2f), timer(0.0f)
 {
 	shape.setPosition(x, y);
 	shape.setSize(size);
@@ -10,6 +12,7 @@ Block::Block(float x, float y, Vector2f size)
 	shape.setOutlineColor(Color::White);
 	shape.setOutlineThickness(2.f);
 	theta = Utils::GetAngleBetweenTwoVec({ size.x * 0.5f, size.y * 0.5f }, normalVector);
+	hp = 1;
 }
 
 Block::~Block()
@@ -18,7 +21,12 @@ Block::~Block()
 
 void Block::Update(float dt)
 {
-
+	if (timer > 0.f)
+	{
+		timer -= dt;
+		if (timer < 0.f)
+			active = true;
+	}
 }
 
 void Block::Draw(RenderWindow& window)
@@ -44,4 +52,11 @@ Vector2f Block::GetNormalVector() const
 float Block::GetTheta() const
 {
 	return theta;
+}
+
+void Block::Hit()
+{
+	hp--;
+	active = false;
+	timer = duration;
 }

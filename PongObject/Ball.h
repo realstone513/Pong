@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameObject/Object.h"
+#include "Bat.h"
 #include "Block.h"
 
 class Ball : public Object
@@ -30,6 +31,6 @@ public:
 	void OnCollisionTop();
 	void OnCollisionSides(float width);
 	void OnCollisionBottom();
-	void OnCollisionBat();
+	void OnCollisionBat(Bat* bat);
 	void OnCollisionBlock(Block* block);
 };

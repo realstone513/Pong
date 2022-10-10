@@ -10,7 +10,7 @@ class Object
 protected:
     int id;
     string name;
-    bool enabled;
+    bool active;
 
     Vector2f position;
     float rotation;

@@ -83,7 +83,7 @@ void Ball::OnCollisionBat(Bat* bat)
 {
 	Vector2f batPosition = bat->GetPosition();
 	curDir.x = position.x - batPosition.x;
-	curDir.x *= 0.003f;
+	curDir.x *= 0.004f;
 	curDir.y = position.y - batPosition.y - 1.0f;
 
 	SetPosition({ position.x, position.y - shape.getRadius() });

@@ -74,6 +74,7 @@ void SceneDev2::Update(float dt)
 
 	if (InputManager::GetKeyDown(Keyboard::Key::R)) // Test
 	{
+		ballActive = false;
 		Exit();
 		Enter();
 	}
@@ -141,7 +142,7 @@ void SceneDev2::Update(float dt)
 			ball->OnCollisionBat(bat);
 			score++;
 		}
-		for (auto it = blocks.begin(); it != blocks.end();)
+		for (auto it = blocks.rbegin(); it != blocks.rend();)
 		{
 			if (ballRect.intersects((*it)->GetBounds()))
 			{
@@ -152,7 +153,10 @@ void SceneDev2::Update(float dt)
 				else
 					SOUND_MGR->Play("sound/hit_hard_block.wav");
 				hitBlocks.push_back(*it);
-				it = blocks.erase(it);
+				// Erase reverse Iterator
+				advance(it, 1);
+				blocks.erase(it.base());
+				//it = blocks.erase(it);
 				break;
 			}
 			else
@@ -177,7 +181,7 @@ void SceneDev2::Update(float dt)
 
 	string hudText =
 		"Score: " + to_string(score) +
-		"\t\t\t\t\tLife: " + to_string(life);
+		"\t\t\t\tLife: " + to_string(life);
 	hud->SetString(hudText);
 
     Scene::Update(dt);

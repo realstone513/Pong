@@ -30,9 +30,6 @@
     <ClCompile Include="PongObject\BlockGenerator.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="collisionTestMain.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DataTable\DataTable.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

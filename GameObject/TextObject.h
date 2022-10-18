@@ -8,7 +8,7 @@ protected:
 
 public:
     TextObject(Font& font,
-        string textString,
+        const wchar_t* textString,
         float sizeX = 0, float sizeY = 0,
         Color textColor = Color::White,
         int textSize = 75);

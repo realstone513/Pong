@@ -67,5 +67,5 @@ Vector2f Utils::Normalize(const Vector2f& vec)
 
 float Utils::GetAngleBetweenTwoVec(const Vector2f& vec1, const Vector2f& vec2)
 {
-	return acos(DotProduct2d(vec1, vec2) / (Magnitude(vec1) * Magnitude(vec2))) / M_PI * 180.f;
+	return acos(DotProduct2d(Normalize(vec1), Normalize(vec2))) / M_PI * 180.f;
 }

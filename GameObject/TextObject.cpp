@@ -1,6 +1,6 @@
 #include "TextObject.h"
 
-TextObject::TextObject(Font& font, string textString,
+TextObject::TextObject(Font& font, const wchar_t* textString,
     float sizeX, float sizeY, Color textColor, int textSize)
 {
     text.setFont(font);

@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "../Frameworks.h"
 #include "../GameObject/SpriteObject.h"
+#include <string>
 
 SceneDev1::SceneDev1()
 	: Scene(Scenes::Dev1)
@@ -19,7 +20,7 @@ void SceneDev1::Enter()
 	objList.push_back(background);
 
 	Vector2i wSize = FRAMEWORK->GetWindowSize() / 2;
-	string titleString = "PONG";
+	const wchar_t* titleString = L"Æþ";
 	float titleTextSize = 250;
 	title = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"),
 		titleString, wSize.x, wSize.y, Color(0, 204, 0, 255), 250);

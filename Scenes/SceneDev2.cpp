@@ -29,9 +29,9 @@ void SceneDev2::Enter()
 	initPos = { wSize.x * 0.5f, wSize.y - 25.f };
 	bat = new Bat(initPos);
 	ball = new Ball(initPos);
-	hud = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"), "", 10.f, 0.f);
+	hud = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"), nullptr, 10.f, 0.f);
 	clearText = new TextObject(*RESOURCES_MGR->GetFont("fonts/DNFBitBitTTF.ttf"),
-		"CLEAR!", wSize.x * 0.5f, wSize.y * 0.5f, Color::White, 250);
+		L"CLEAR!", wSize.x * 0.5f, wSize.y * 0.5f, Color::White, 250);
 	clearText->SetActive(false);
 	clearText->SetOrigin(Origins::MC);
 	if (!bg.GetBlocks(blocks, wSize.x, curStage))
